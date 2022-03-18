@@ -14,6 +14,7 @@ use App\Http\Controllers\EmpleadoController;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,8 +25,13 @@ Route::get('/', function () {
 
 // Route::get('empleado/create',[EmpleadoController::class,'create']);
 
-Route::resource('empleado',EmpleadoController::class);
+Route::resource('empleado',EmpleadoController::class)->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
+});
