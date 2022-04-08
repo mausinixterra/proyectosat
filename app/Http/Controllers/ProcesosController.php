@@ -12,6 +12,7 @@ use App\Models\Solicitantes;
 use App\Models\TiempoInvertido;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Auth;
 
 class ProcesosController extends Controller
 {
@@ -22,7 +23,12 @@ class ProcesosController extends Controller
      */
     public function index()
     {
-        $procesos = Procesos::paginate(10);
+        if (auth()->user()->hasRole('colaborador')) {
+            $usuario = auth()->user();
+            $procesos = Procesos::where('realizado_por_id', '=', $usuario->id)->paginate(10);
+        } else {
+            $procesos = Procesos::paginate(10);
+        }
         return view("proceso.index", compact('procesos'));
     }
 
@@ -51,8 +57,8 @@ class ProcesosController extends Controller
     public function store(Request $request)
     {
         $datosProceso = request()->except('_token');
-        
-        
+
+
         if($request->hasFile('evidencia')){
             $datosProceso['evidencia'] = $request->file('evidencia')->store('upload','public');
         }
