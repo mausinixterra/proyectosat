@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Scripts -->
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
