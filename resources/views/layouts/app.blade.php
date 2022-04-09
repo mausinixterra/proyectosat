@@ -29,7 +29,7 @@
                     <samp> &nbsp;&nbsp;&nbsp;</samp>
                     @auth
                         @if(@Auth::user()->hasRole('administrador'))
-                        <a class="font-semibold text-gray-100 no-underline" href="{{ route('admin.index') }}">Configuración</a>
+                            <a class="font-semibold text-gray-100 no-underline" href="{{ route('admin.index') }}">Configuración</a>
                         @endif
                     @endauth
                 </div>
@@ -37,7 +37,7 @@
                     @guest
                         {{-- <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a> --}}
                         @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            {{-- <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a> --}}
                         @endif
                     @else
                         <span>{{ Auth::user()->name }}</span>

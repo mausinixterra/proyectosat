@@ -32,7 +32,7 @@ Route::resource('clientes', ClientesController::class)->middleware('auth');
 Route::resource('solicitantes', SolicitantesController::class)->middleware('auth');
 Route::resource('tiempo', TiempoController::class)->middleware('auth');
 
-Auth::routes(['register'=>false,'reset'=>false]);
+Auth::routes();
 
 Route::get('admin/export/', [ProcesosController::class, 'export'])->middleware('auth');
 
