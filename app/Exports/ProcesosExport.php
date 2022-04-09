@@ -22,6 +22,20 @@ class ProcesosExport implements FromCollection
         ->join('tiempo_invertido AS ti', 'procesos.tiempo_invertido_id', '=', 'ti.id')
         ->get();
 
+        $datos[0] = array(
+            "Fecha registro",
+            "Fecha actividad",
+            "actividad",
+            "Descripción",
+            "Canal atención",
+            "Solicitante",
+            "Cliente",
+            "Realizado por",
+            "Tiempo invertido",
+            "Valor servicio",
+            "Costo actividad",
+            "Evidencia",
+        );
         return $datos;
     }
 }
