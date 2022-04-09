@@ -27,7 +27,6 @@
             @endauth
         </div>
     @endif
-
     <div class="min-h-screen flex items-center justify-center">
         <div class="flex flex-col justify-around h-full">
             <div>
