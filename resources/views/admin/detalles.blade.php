@@ -1,4 +1,4 @@
-<p class="text-2xl text-center py-10">{{ $lista }}</p>
+<p class="text-2xl text-center pyt-">{{ $lista }}</p>
 <div >
     @if (Session::has('mensaje'))
         <div id="alert-3" class="flex p-4 mb-4 bg-green-100 rounded-lg dark:bg-green-200" role="alert">
@@ -40,16 +40,45 @@
                     @if ($tipo == 'usuario')
                         <th scope="col" class="px-6 py-3">Correo</th>
                     @endif
+                    <th scope="col" class="px-6 py-3">Opciones</th>
                 </tr>
             </thead>
             <tbody>
+                @php $id = 1 @endphp
                 @foreach( $listados as $lista )
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">{{ $lista->id }}</td>
+
+                    <td class="px-6 py-4">{{ $id }}</td>
+                    @php
+                        $editar = [
+                            'id' => $lista->id,
+                            'nombre' => $tipo != 'usuario' ?  $lista->nombre : $lista->name
+                        ];
+                        $id++;
+                    @endphp
                     <td class="px-6 py-4">{{ $tipo != 'usuario' ?  $lista->nombre : $lista->name }}</td>
                     @if ($tipo == 'usuario')
                         <td scope="col" class="px-6 py-3">{{ $lista->email }}</td>
                     @endif
+                    <td class="px-6 py-4 inline-flex">
+                        <a class="editar stroke-current stroke-2 hover:text-yellow-400" href="#" data-modal-toggle="editar-modal" id="{{ $editar['id'].'&'.$editar['nombre'] }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <form action="{{ url('/'.$url.'/'.$lista->id) }} " method="post">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <label class="stroke-current stroke-2 hover:text-red-400 inline-flex cursor-pointer">
+                                <input type="submit" onclick="javascript:return confirm('¿Seguro de eliminar este registro?');"  value="">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </label>
+                        </form>
+
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -58,8 +87,3 @@
     {!! $listados->links()!!}
     <br><br><br>
 </div>
-
-
-
-
-

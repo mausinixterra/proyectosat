@@ -39,7 +39,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -52,27 +52,27 @@ class AdminController extends Controller
     {
         switch ($admin) {
             case 'actividades':
-                $listados = Actividades::paginate(10);
+                $listados = Actividades::where('estado_registro', '=', 'A')->paginate(10);
                 return view("admin.actividades", compact('listados'));
             break;
             case 'canales':
-                $listados = CanalAtencion::paginate(10);
+                $listados = CanalAtencion::where('estado_registro', '=', 'A')->paginate(10);
                 return view('admin.canales', compact('listados'));
             break;
             case 'solicitantes':
-                $listados = Solicitantes::paginate(10);
+                $listados = Solicitantes::where('estado_registro', '=', 'A')->paginate(10);
                 return view('admin.solicitantes', compact('listados'));
             break;
             case 'clientes':
-                $listados = Clientes::paginate(10);
+                $listados = Clientes::where('estado_registro', '=', 'A')->paginate(10);
                 return view('admin.clientes', compact('listados'));
             break;
             case 'tiempo':
-                $listados = TiempoInvertido::paginate(10);
+                $listados = TiempoInvertido::where('estado_registro', '=', 'A')->paginate(10);
                 return view('admin.tiempo', compact('listados'));
             break;
             case 'registrar':
-                $listados = User::paginate(10);
+                $listados = User::where('estado_registro', '=', 'A')->paginate(10);
                 return view('admin.usuarios', compact('listados'));
             break;
         }

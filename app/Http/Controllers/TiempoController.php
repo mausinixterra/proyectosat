@@ -19,4 +19,18 @@ class TiempoController extends Controller
         TiempoInvertido::insert($datosProceso);
         return redirect('admin/tiempo')->with('mensaje', 'El registro del tiempo invertido fue creado con exito');
     }
+
+    public function destroy($id)
+    {
+        TiempoInvertido::where('id', '=', $id)->update(['estado_registro' => 'I']);
+        return redirect('admin/tiempo')->with('mensaje', 'El registro del tiempo invertido fue eliminado con exito');
+    }
+
+    public function update(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        TiempoInvertido::where('id', '=', $data['id'])->update(['nombre' => $data['nombre']]);
+        return redirect('admin/tiempo')->with('mensaje', 'El registro del tiempo invertido fue actualizado con exito');
+    }
+
 }

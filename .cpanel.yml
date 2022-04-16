@@ -1,10 +1,10 @@
-# ---
-# deployment:
-#   tasks:
-#     - export DEPLOYPATH=/comunida/public_html/sat/registro-actividades/
-#     - /bin/rm -Rf $DEPLOYPATH
-#     - /bin/mkdir $DEPLOYPATH
-#     - /bin/cp -R app/. $DEPLOYPATH
-#     - /bin/cp -R public/. $DEPLOYPATH
-#     - /bin/cp -R resources/. $DEPLOYPATH
-#     - /bin/cp -R routes/. $DEPLOYPATH
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/comunida/public_html/sat/registro-actividades/
+    - /bin/rm -Rf $DEPLOYPATH
+    - /bin/mkdir $DEPLOYPATH
+    - /bin/cp -R app/. $DEPLOYPATH
+    - /bin/cp -R public/. $DEPLOYPATH
+    - /bin/cp -R resources/. $DEPLOYPATH
+    - /bin/cp -R routes/. $DEPLOYPATH

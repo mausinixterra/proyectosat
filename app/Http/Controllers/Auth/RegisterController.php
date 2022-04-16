@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $this->setRealizadoPor($data['name']);
-        return $user->assignRole('administrador');
+        return $user->assignRole('colaborador');
     }
 
     public function setRealizadoPor($data)
