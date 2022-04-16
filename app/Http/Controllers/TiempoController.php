@@ -32,5 +32,4 @@ class TiempoController extends Controller
         TiempoInvertido::where('id', '=', $data['id'])->update(['nombre' => $data['nombre']]);
         return redirect('admin/tiempo')->with('mensaje', 'El registro del tiempo invertido fue actualizado con exito');
     }
-
 }

@@ -72,7 +72,7 @@ class AdminController extends Controller
                 return view('admin.tiempo', compact('listados'));
             break;
             case 'registrar':
-                $listados = User::where('estado_registro', '=', 'A')->paginate(10);
+                $listados = User::paginate(10);
                 return view('admin.usuarios', compact('listados'));
             break;
         }

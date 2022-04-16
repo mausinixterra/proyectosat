@@ -19,4 +19,17 @@ class ClientesController extends Controller
         Clientes::insert($datosProceso);
         return redirect('admin/clientes')->with('mensaje', 'El registro del cliente fue creado con exito');
     }
+
+    public function destroy($id)
+    {
+        Clientes::where('id', '=', $id)->update(['estado_registro' => 'I']);
+        return redirect('admin/clientes')->with('mensaje', 'El registro del cliente fue eliminado con exito');
+    }
+
+    public function update(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        Clientes::where('id', '=', $data['id'])->update(['nombre' => $data['nombre']]);
+        return redirect('admin/clientes')->with('mensaje', 'El registro del cliente fue actualizado con exito');
+    }
 }

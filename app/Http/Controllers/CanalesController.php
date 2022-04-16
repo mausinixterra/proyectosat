@@ -19,4 +19,17 @@ class CanalesController extends Controller
         CanalAtencion::insert($datosProceso);
         return redirect('admin/canales')->with('mensaje', 'El registro del canal de atención fue creado con exito');
     }
+
+    public function destroy($id)
+    {
+        CanalAtencion::where('id', '=', $id)->update(['estado_registro' => 'I']);
+        return redirect('admin/canales')->with('mensaje', 'El registro del canal de atención fue eliminado con exito');
+    }
+
+    public function update(Request $request)
+    {
+        $data = request()->except(['_token', '_method']);
+        CanalAtencion::where('id', '=', $data['id'])->update(['nombre' => $data['nombre']]);
+        return redirect('admin/canales')->with('mensaje', 'El registro del canal de atención fue actualizado con exito');
+    }
 }
