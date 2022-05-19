@@ -25,9 +25,9 @@ class ProcesosController extends Controller
     {
         if (auth()->user()->hasRole('colaborador')) {
             $usuario = auth()->user();
-            $procesos = Procesos::where('realizado_por_id', '=', $usuario->id)->paginate(10);
+            $procesos = Procesos::where('realizado_por_id', '=', $usuario->id)->where('estado_registro', '=', 'A')->paginate(15);
         } else {
-            $procesos = Procesos::paginate(10);
+            $procesos = Procesos::where('estado_registro', '=', 'A')->paginate(15);
         }
         return view("proceso.index", compact('procesos'));
     }
@@ -96,26 +96,27 @@ class ProcesosController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Procesos  $procesos
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Procesos::where('id', '=', $id)->update(['estado_registro' => 'I']);
+        return redirect('proceso')->with('mensaje', 'La actividad fue eliminada con exito');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Procesos  $procesos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Procesos $procesos)
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Procesos  $procesos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Procesos $procesos)
-    {
-        //
+        // TO DO
     }
 
     public function getActividades()
